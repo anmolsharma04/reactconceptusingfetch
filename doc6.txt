@@ -1,0 +1,27 @@
+use an api and display the data in the form of the cards under the container 
+
+use api -- https://jsonplaceholder.typicode.com/posts
+
+const [count, setCount] = useState(0);: This creates a state variable count with an initial value of 0. setCount is a function to update count. (Currently, count is not used in the component.)
+const [cards, setCards] = useState([]);: This creates a state variable cards with an initial value of an empty array. setCards is a function to update cards.
+
+
+
+const fetchData = async () => {: This defines an asynchronous function called fetchData.
+let response = await fetch("https://jsonplaceholder.typicode.com/posts");: This line fetches data from the given URL. await means it waits for the data to be fetched before moving to the next line.
+let data = await response.json();: This line converts the fetched data into a JSON format. await ensures it waits until the data is converted.
+setCards(data);: This line updates the cards state variable with the fetched data.
+console.log(data);: This line logs the fetched data to the console for debugging purposes.
+
+
+
+useEffect(() => { fetchData(); }, []);: This line runs the fetchData function once when the component is first rendered. The empty array [] means it only runs once.
+
+
+return (: This begins the JSX (JavaScript XML) that defines what the component will render.
+<div className="container">: This creates a div element with a class of container.
+{cards.map((card) => { ... })}: This maps over the cards array and returns a new JSX element for each card.
+<div key={card.id} className="card">: This creates a div for each card with a unique key based on the card's id and a class of card.
+<h1>{card.title}</h1>: This displays the title of the card in an h1 element.
+<p>{card.body}</p>: This displays the body of the card in a p element.
+<span>User ID: {card.userId}</span>: This displays the user ID of the card in a span element.
